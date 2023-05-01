@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/3c022829bc.js" crossorigin="anonymous"></script>
+    <title>LOGIN PAGE</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+        <h1 id="heading">Sign Up</h1>
+    <form action="" name="myform" onsubmit="return formvalidation()">
+        <div class="input-group">
+            <div class="input-field">
+                <i  id="user" class="fa-sharp fa-solid fa-user"></i>
+                <input type="name" name="fname" id="namefeild" placeholder="Name"></input>
+            </div> 
+                <div class="error" id="nameerror"></div>
+                <div class="input-field">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email"></input>
+            </div>
+            <div class="error" id="emailerror"></div>
+            <span><button type="button" id="otp">send otp</button></span>
+            <div class="input-field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="password" placeholder="Password"></input>
+            </div>
+            <div class="error" id="passworderror"></div>
+            <div class="input-field">
+                <i id="lock" class="fa-solid fa-lock"></i>
+                <input type="password" id="confirm" placeholder="Confirm Password"></input>
+            </div>
+            <div class="error" id="confirmpassworderror"></div>
+            <p id="forget" style="display: none">forget password <a id="pwd" href='#'>Click here</a></p>
+        </div>
+        <div>
+        <div><button type="submit"  id="submit" >Submit</button></div>
+        <div class="btn-field">
+            <button type="button" id="btn1" >Sign in</button>
+            <button type="button" id="btn2" class="disable" >Sign up </button>
+        </div>
+    </div>
+    </form></div>
+    </div>
+    <script>
+        const btn1=document.getElementById("btn1");
+        const btn2=document.getElementById("btn2");
+        const submit=document.getElementById("submit");
+        const forgetpwd=document.getElementById("pwd");
+        const otp=document.getElementById("otp");
+        const name=document.getElementById("namefeild");
+        const mobile=document.getElementById("password");
+        const heading=document.getElementById("heading");
+        const user=document.getElementById("user")
+        let confirm=document.getElementById("confirm")
+        const confirmlock=document.getElementById("lock")
+        const forget=document.getElementById("forget");
+        function seterror(id,error){
+            element=document.getElementById(id);
+            element.innerHTML=error;
+        }
+        function clearerror(){
+            errors=document.getElementsByClassName("error");
+            for(let x of errors)
+            {
+            x.innerHTML="";
+            }
+        }
+        let login;
+        let hideconfirm;
+        let forgetpassword;
+        const email=document.getElementById("email").value;
+        function formvalidation()
+        {
+        const name=document.getElementById("namefeild").value;
+        const email=document.getElementById("email").value;
+        const password=document.getElementById("password").value;
+            let returnval=true;
+            
+            clearerror();
+            // let nameval=document.forms['myform']["fname"].value;
+            // console.log(nameval.length)
+            if(login!=5){
+            if(name.length<5)
+            {
+               seterror("nameerror","*Enter valid name");
+               returnval=false;
+            }
+        }
+            
+            if(email.length<5)
+            {
+               seterror("emailerror","*Enter valid email");
+               returnval=false;
+            }
+            if(password.length<6)
+            {
+               seterror("passworderror","*Enter valid password");
+               returnval=false;
+            }
+            if(hideconfirm!=3)
+            if(confirm.value!=password)
+            {
+               seterror("confirmpassworderror","*password not match");
+               returnval=false;
+            }
+            if(forgetpassword!=3)
+            if(returnval==true)
+            {
+                alert("successfully submit");
+            }
+            if(forgetpassword==3)
+            if(returnval==true)
+            {
+                alert("Go to registered email and reset password")
+            }
+            return returnval;
+        }
+            //  otp.onclick=function(){
+            //     clearerror();
+            //     if(email.length<5)
+            // {
+            //     elements=document.getElementById("emailerror");
+            // elements.innerHTML="Enter valid email";
+            //  }
+            // }
+            btn1.onclick=function(){
+                clearerror();
+            forgetpassword=1;
+            login=5;
+            hideconfirm=3;
+            name.style.maxHeight="0";
+            name.style.border= "0";
+            heading.innerHTML="Sign In";
+            user.style.display="none";
+            otp.style.display="none";
+            confirm.style.display="none";
+            confirmlock.style.display="none";
+            forget.style.display="block";
+            btn1.classList.add("disable");
+            btn2.classList.remove("disable");
+            mobile.setAttribute("placeholder","Password");
+            
+         }
+         forgetpwd.onclick=function(){
+            clearerror();
+            hideconfirm=3;
+            login=5;
+            forgetpassword=3;
+            name.style.maxHeight="0";
+            name.style.border= "0";
+            heading.innerHTML="Forget";
+            user.style.display="none";
+            otp.style.display="block";
+            confirm.style.display="none";
+            confirmlock.style.display="none";
+            forget.style.display="none";
+            btn1.classList.add("disable");
+            btn2.classList.remove("disable");
+            // submit.style.marginBottom="-20px";
+            mobile.setAttribute("placeholder","Enter OTP")
+         }
+         btn2.onclick=function(){
+            clearerror();
+            hideconfirm=1;
+            forgetpassword=1;
+            login=1;
+            otp.style.display="none";
+            mobile.setAttribute("placeholder","Password")
+            confirm.style.display="inline";
+            confirmlock.style.display="inline";
+            name.style.maxHeight="50px";
+            user.style.display="inline";
+            forget.style.display="none";
+            heading.innerHTML="Sign Up";
+            name.style.border= "3px solid black";
+            btn2.classList.add("disable");
+            btn1.classList.remove("disable");
+         }
+    </script>
+</body>
+</html>
